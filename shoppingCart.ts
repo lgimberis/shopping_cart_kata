@@ -1,5 +1,7 @@
 import { Product } from "./product.ts";
 import type { ProductService } from "./productService.ts";
+import { PROMOTIONS } from "./promotion.ts";
+import { type Promotion } from "./promotion.ts";
 
 export type ShoppingCartRender = {
   products: {
@@ -14,20 +16,25 @@ export type ShoppingCartRender = {
 export class ShoppingCart {
   productService: ProductService;
   products: Map<string, { product: Product; quantity: number }>;
+  promotions: string[];
   constructor(productService: ProductService) {
     this.productService = productService;
     this.products = new Map();
+    this.promotions = [];
   }
 
   render(): ShoppingCartRender {
     const products = [];
     let numberOfProducts = 0;
     let totalPrice = 0.0;
-    for (const [name, { product, quantity }] of this.products.entries()) {
+    for (let [name, { product, quantity }] of this.products.entries()) {
       const priceWithVAT = product.getFinalPrice();
       products.push({ name, priceWithVAT, quantity });
       numberOfProducts += quantity;
-      totalPrice += priceWithVAT * quantity;
+      for (const promotion of this.promotions) {
+        product = PROMOTIONS[promotion].applyDiscount(product);
+      }
+      totalPrice += product.getFinalPrice() * quantity;
     }
     return {
       products,
@@ -50,5 +57,11 @@ export class ShoppingCart {
       throw new Error(`Product ${name} does not exist in service`);
     }
     this.products.set(name, { product, quantity: 1 });
+  }
+
+  applyPromotion(promotionCode: string) {
+    if (Object.keys(PROMOTIONS).includes(promotionCode)) {
+      this.promotions.push(promotionCode);
+    }
   }
 }

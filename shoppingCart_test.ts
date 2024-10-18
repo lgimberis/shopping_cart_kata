@@ -1,5 +1,6 @@
 import { assertEquals } from "@std/assert";
 import { ShoppingCart, ShoppingCartRender } from "./shoppingCart.ts";
+import { PROMOTIONS } from "./promotion.ts";
 import { ProductService } from "./productService.ts";
 import { TestProductSource } from "./testProductSource.ts";
 
@@ -83,3 +84,19 @@ Deno.test("Add multiple quantities of several items", function addTwoItems() {
   };
   assertEquals(cart.render(), expected);
 });
+
+Deno.test(
+  "Add a single item to the shopping cart and use a promotion",
+  function addOneItemWithPromotion() {
+    const productService = new ProductService(new TestProductSource());
+    const cart = new ShoppingCart(productService);
+    cart.add("Corn");
+    cart.applyPromotion("PROMO_10");
+    const expected = {
+      products: [{ name: "Corn", priceWithVAT: 1.5, quantity: 1 }],
+      numberOfProducts: 1,
+      totalPrice: 1.35,
+    };
+    assertEquals(cart.render(), expected);
+  }
+);
