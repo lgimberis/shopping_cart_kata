@@ -1,6 +1,5 @@
 import { assertEquals } from "@std/assert";
 import { ShoppingCart, ShoppingCartRender } from "./shoppingCart.ts";
-import { PROMOTIONS } from "./promotion.ts";
 import { ProductService } from "./productService.ts";
 import { TestProductSource } from "./testProductSource.ts";
 

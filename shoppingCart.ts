@@ -1,7 +1,6 @@
 import { Product } from "./product.ts";
 import type { ProductService } from "./productService.ts";
 import { PROMOTIONS } from "./promotion.ts";
-import { type Promotion } from "./promotion.ts";
 
 export type ShoppingCartRender = {
   products: {
