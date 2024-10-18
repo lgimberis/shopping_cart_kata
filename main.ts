@@ -1,7 +1,9 @@
+import { Product } from "./product.ts";
+
 export class ShoppingCart {
   constructor() {}
 
-  render(): Map<any, any> {
+  render(): Map<string, Product> {
     return new Map();
   }
 }

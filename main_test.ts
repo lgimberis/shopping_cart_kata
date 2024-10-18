@@ -1,4 +1,4 @@
-import { assert, assertEquals } from "@std/assert";
+import { assertEquals } from "@std/assert";
 import { ShoppingCart } from "./main.ts";
 
 Deno.test("Test that empty cart is empty", function emptyTest() {
