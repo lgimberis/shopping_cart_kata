@@ -11,6 +11,7 @@ export type ShoppingCartRender = {
   }[];
   numberOfProducts: number;
   totalPrice: number;
+  promotionsApplied?: string[];
 };
 
 export class ShoppingCart {
@@ -36,11 +37,15 @@ export class ShoppingCart {
       }
       totalPrice += product.getFinalPrice() * quantity;
     }
-    return {
+    const render: ShoppingCartRender = {
       products,
       numberOfProducts,
       totalPrice,
     };
+    if (this.promotions.length > 0) {
+      render["promotionsApplied"] = this.promotions;
+    }
+    return render;
   }
 
   add(name: string) {

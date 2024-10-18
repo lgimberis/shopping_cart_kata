@@ -96,6 +96,7 @@ Deno.test(
       products: [{ name: "Corn", priceWithVAT: 1.5, quantity: 1 }],
       numberOfProducts: 1,
       totalPrice: 1.35,
+      promotionsApplied: ["PROMO_10"],
     };
     assertEquals(cart.render(), expected);
   }
