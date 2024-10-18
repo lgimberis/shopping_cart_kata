@@ -3,6 +3,7 @@ During the session I did this in pair programming with someone who used Deno, an
 
 I've decided to abstract away the given input patterns ("as a customer... i want to see my shopping cart") and output patterns (displaying results in a table) for the pure reason that while necessary in the real world I find these tedious for our purposes.
 I will be writing tests that directly call the functions that would be called by the input parser, and which return a JSON that would be directly rendered by an output renderer.
+I also find the use of "revenue" confusing as this would make sense for a final selling price, but instead it's being used to describe a margin of sorts, so I will be replacing this with "margin".
 
 The kata was originally hosted at https://www.codurance.com/katas/shopping-cart-kata
 
