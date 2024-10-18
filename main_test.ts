@@ -41,3 +41,20 @@ Deno.test(
     assertEquals(cart.render(), expected);
   }
 );
+
+Deno.test("Add two different items to the cart", function addTwoItems() {
+  const productService = new ProductService(new TestProductSource());
+  const cart = new ShoppingCart(productService);
+  cart.add("Corn");
+  cart.add("Bread");
+  const expected = {
+    products: [
+      { name: "Corn", priceWithVAT: 1.5, quantity: 1 },
+      { name: "Bread", priceWithVAT: 0.88, quantity: 1 },
+    ],
+
+    numberOfProducts: 2,
+    totalPrice: 2.38,
+  };
+  assertEquals(cart.render(), expected);
+});
