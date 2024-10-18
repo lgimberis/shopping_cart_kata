@@ -58,3 +58,28 @@ Deno.test("Add two different items to the cart", function addTwoItems() {
   };
   assertEquals(cart.render(), expected);
 });
+
+Deno.test("Add multiple quantities of several items", function addTwoItems() {
+  const productService = new ProductService(new TestProductSource());
+  const cart = new ShoppingCart(productService);
+  cart.add("Corn");
+  cart.add("Tomato");
+  cart.add("Chicken");
+  cart.add("Bread");
+  cart.add("Bread");
+  cart.add("Chicken");
+  cart.add("Corn");
+  cart.add("Corn");
+  const expected = {
+    products: [
+      { name: "Corn", priceWithVAT: 1.5, quantity: 3 },
+      { name: "Tomato", priceWithVAT: 0.73, quantity: 1 },
+      { name: "Chicken", priceWithVAT: 1.83, quantity: 2 },
+      { name: "Bread", priceWithVAT: 0.88, quantity: 2 },
+    ],
+
+    numberOfProducts: 8,
+    totalPrice: 10.65,
+  };
+  assertEquals(cart.render(), expected);
+});
