@@ -25,3 +25,19 @@ Deno.test("Add a single item to the shopping cart", function addOneItem() {
   };
   assertEquals(cart.render(), expected);
 });
+
+Deno.test(
+  "Add a single item to the shopping cart... twice",
+  function addOneItemTwice() {
+    const productService = new ProductService(new TestProductSource());
+    const cart = new ShoppingCart(productService);
+    cart.add("Corn");
+    cart.add("Corn");
+    const expected = {
+      products: [{ name: "Corn", priceWithVAT: 1.5, quantity: 2 }],
+      numberOfProducts: 2,
+      totalPrice: 3.0,
+    };
+    assertEquals(cart.render(), expected);
+  }
+);
