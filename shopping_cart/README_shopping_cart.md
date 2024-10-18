@@ -1,6 +1,9 @@
 This session involved a return to implementing an example mini-project / problem / "kata" called the Shopping Cart, focusing on correct use of TDD.
 During the session I did this in pair programming with someone who used Deno, and I'm re-doing it by myself after the fact for practise purposes, as Deno looks very convenient to use for such sessions moving forward thanks to its fast setup.
 
+I've decided to abstract away the given input patterns ("as a customer... i want to see my shopping cart") and output patterns (displaying results in a table) for the pure reason that while necessary in the real world I find these tedious for our purposes.
+I will be writing tests that directly call the functions that would be called by the input parser, and which return a JSON that would be directly rendered by an output renderer.
+
 The kata was originally hosted at https://www.codurance.com/katas/shopping-cart-kata
 
 As this URL is not guaranteed to stay, here is a copy of the page's content, comprising the remainder of this file.
